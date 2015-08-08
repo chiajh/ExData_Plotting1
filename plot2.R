@@ -10,11 +10,12 @@ subData <- data[data$Date >= "2007-02-01" & data$Date <= "2007-02-02", ]
 
 # Remove the big data from memory
 rm(data)
+ 
+datetime <- strptime(paste(as.character(subData$Date), subData$Time, sep=" "), "%Y-%m-%d %H:%M:%S") 
 
-# Plot the histogram
-hist(subData$Global_active_power, main="Global Active Power", 
-     xlab="Global Active Power (kilowatts)", ylab="Frequency", col="Red")
+## Plot 2
+plot(datetime, subData$Global_active_power,type="l",
+     ylab="Global Active Power (kilowatts)", xlab="")
 
-## Save to png file
-dev.copy(png, file="plot1.png", height=480, width=480)
+dev.copy(png, file="plot2.png", height=480, width=480)
 dev.off()
